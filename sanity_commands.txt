@@ -1,0 +1,16 @@
+
+# Running Sanity Studio
+
+npm run dev
+
+# To open the documentation in a browser
+
+sanity docs
+
+# To open the project setting in a browser
+
+sanity manage
+
+# To explore the CLI manual
+
+sanity help
