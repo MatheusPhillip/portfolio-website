@@ -4,15 +4,28 @@ import {motion} from 'framer-motion';
 import {images} from "../../constants";
 
 import './About.scss'
+import {urlFor, client} from '../../client';
 
+/*
 const abouts = [
   {title: "Web Development", description: "I am a good web developer.", imgUrl: images.about07, imgAttributionDescription: "Image by pikisuperstar", imgAttributionWebsite: "on Freepik"},
   {title: "Test Automation", description: "I am a good web developer.", imgUrl: images.about05, imgAttributionDescription: "Image by storyset", imgAttributionWebsite: "on Freepik"},
   {title: "Backend Development", description: "I am a good web developer.", imgUrl: images.about04, imgAttributionDescription: "Image by pikisuperstar", imgAttributionWebsite: "on Freepik"},
   {title: "Software Engineering", description: "I am a good web developer.", imgUrl: images.about04, imgAttributionDescription: "Image by pikisuperstar", imgAttributionWebsite: "on Freepik"}
 ];
+*/
 
 const About = () => {
+
+  const [abouts, setAbouts] = useState([]);
+
+  useEffect(() =>{
+    const query = '*[_type == "abouts"]';
+
+    client.fetch(query)
+      .then((data) => setAbouts(data))
+  }, []);
+
   return (
     <>
       <h2 className="head-text">I Know That<span> Good Apps</span><br /> Means <span>Good Experience</span></h2>
@@ -26,8 +39,8 @@ const About = () => {
               className="app__profile-item"
               key={about.title + index}
             >
-              <img src={about.imgUrl} alt={about.title} />
-              <p className="p-text" style={{marginTop: 5}}>{about.imgAttributionDescription} {about.imgAttributionWebsite}</p>
+              <img src={urlFor(about.imgUrl)} alt={about.title} />
+              <p className="p-text" style={{marginTop: 5}}>{about.imgAttributionDescription}</p>
               <h2 className="bold-text" style={{marginTop: 20}}>{about.title}</h2>
               <p className="p-text" style={{marginTop: 10}}>{about.description}</p>
             </motion.div>
